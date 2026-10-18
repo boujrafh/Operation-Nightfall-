@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no"
+    />
+    <meta http-equiv="Content-Security-Policy" content="__CSP__" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Nightfall" />
+    <meta
+      name="description"
+      content="Operation Nightfall: a top-down 8-bit stealth game in the MSX2 style. Plays offline."
+    />
+    <title>Operation Nightfall</title>
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png" />
+    <link rel="apple-touch-icon" href="icons/apple-touch-icon-180.png" />
+    <!-- INLINE_CSS -->
+  </head>
+  <body>
+    <div id="app">
+      <canvas
+        id="screen"
+        width="256"
+        height="212"
+        aria-label="Operation Nightfall game screen"
+      ></canvas>
+    </div>
+
+    <div id="touch" class="touch hidden" aria-hidden="true" data-size="M">
+      <div id="stick-zone" class="stick-zone">
+        <div id="stick-base" class="stick-base"><div id="stick-knob" class="stick-knob"></div></div>
+      </div>
+      <button id="btn-pause" class="tbtn tbtn-pause" type="button" aria-label="Pause">II</button>
+      <button id="btn-w" class="tbtn tbtn-w" type="button" aria-label="Change weapon">W</button>
+      <button id="btn-b" class="tbtn tbtn-b" type="button" aria-label="Change item">B</button>
+      <button id="btn-a" class="tbtn tbtn-a" type="button" aria-label="Action">A</button>
+    </div>
+
+    <div id="toast" class="toast hidden" role="status"></div>
+    <div id="update" class="update hidden" role="status">
+      <span>UPDATE AVAILABLE</span>
+      <button id="update-btn" type="button">RELOAD</button>
+    </div>
+    <noscript><p class="noscript">OPERATION NIGHTFALL NEEDS JAVASCRIPT.</p></noscript>
+    <!-- INLINE_JS -->
+  </body>
+</html>

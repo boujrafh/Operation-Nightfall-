@@ -1,0 +1,36 @@
+{
+  "name": "operation-nightfall",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Top-down 8-bit stealth game in the MSX2 style, delivered as an offline PWA.",
+  "type": "module",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "dev": "node scripts/build.mjs && node scripts/serve.mjs dist 4173",
+    "serve": "node scripts/serve.mjs dist 4173",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "typecheck": "tsc -p jsconfig.json",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "validate": "node scripts/validate-content.mjs",
+    "size": "node scripts/check-size.mjs",
+    "e2e": "playwright test",
+    "check": "npm run lint && npm run typecheck && npm run validate && npm test && npm run build && npm run size"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@playwright/test": "^1.64.1",
+    "esbuild": "^0.28.2",
+    "eslint": "^10.13.0",
+    "globals": "^17.13.0",
+    "prettier": "^3.9.10",
+    "typescript": "^5.9.3",
+    "vitest": "^5.0.5"
+  }
+}
