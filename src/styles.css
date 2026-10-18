@@ -1,0 +1,272 @@
+:root {
+  --void: #000000;
+  --night: #1b1b2f;
+  --steel: #33335c;
+  --blue: #5468d9;
+  --cyan: #6fd3ff;
+  --yellow: #ffd43b;
+  --red: #e02b2b;
+  --white: #ffffff;
+  --btn: 60px;
+  --btn-a: 76px;
+  --stick: 120px;
+  --knob: 50px;
+  --pad-h: min(46vh, 320px);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+  background: var(--void);
+  color: var(--white);
+  overflow: hidden;
+  overscroll-behavior: none;
+  touch-action: none;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  font-family: ui-monospace, 'Courier New', monospace;
+  text-transform: uppercase;
+}
+
+#app {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--void);
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom)
+    env(safe-area-inset-left);
+}
+
+#screen {
+  display: block;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  background: var(--void);
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* ---------------------------------------------------------------- touch */
+
+.touch {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.touch[data-size='S'] {
+  --btn: 48px;
+  --btn-a: 60px;
+  --stick: 100px;
+  --knob: 42px;
+}
+
+.touch[data-size='L'] {
+  --btn: 72px;
+  --btn-a: 92px;
+  --stick: 144px;
+  --knob: 60px;
+}
+
+.stick-zone {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 50%;
+  pointer-events: auto;
+  touch-action: none;
+}
+
+.stick-base {
+  position: absolute;
+  left: calc(env(safe-area-inset-left) + 90px);
+  top: calc(100% - env(safe-area-inset-bottom) - 100px);
+  width: var(--stick);
+  height: var(--stick);
+  margin-left: calc(var(--stick) / -2);
+  margin-top: calc(var(--stick) / -2);
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  border-radius: 50%;
+  opacity: 0.6;
+}
+
+.stick-base.active {
+  opacity: 1;
+}
+
+.stick-knob {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: var(--knob);
+  height: var(--knob);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.35);
+  transform: translate(-50%, -50%);
+}
+
+.tbtn {
+  position: absolute;
+  pointer-events: auto;
+  touch-action: none;
+  width: var(--btn);
+  height: var(--btn);
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.45);
+  background: rgba(0, 0, 0, 0.25);
+  color: rgba(255, 255, 255, 0.8);
+  font:
+    bold 18px ui-monospace,
+    monospace;
+  opacity: 0.6;
+  padding: 0;
+}
+
+.tbtn.pressed {
+  opacity: 1;
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.tbtn-a {
+  width: var(--btn-a);
+  height: var(--btn-a);
+  border-color: var(--red);
+  right: calc(env(safe-area-inset-right) + 24px);
+  bottom: calc(env(safe-area-inset-bottom) + 40px);
+}
+
+.tbtn-b {
+  right: calc(env(safe-area-inset-right) + 24px + var(--btn-a) + 14px);
+  bottom: calc(env(safe-area-inset-bottom) + 24px);
+}
+
+.tbtn-w {
+  right: calc(env(safe-area-inset-right) + 32px);
+  bottom: calc(env(safe-area-inset-bottom) + 40px + var(--btn-a) + 14px);
+}
+
+.tbtn-pause {
+  width: 44px;
+  height: 44px;
+  font-size: 14px;
+  left: calc(env(safe-area-inset-left) + 12px);
+  top: calc(env(safe-area-inset-top) + 12px);
+}
+
+/* ---------------------------------------------------------------- portrait (phone held upright)
+   Game on top, control pad below, like a handheld console. */
+
+body.portrait #app {
+  bottom: var(--pad-h);
+  align-items: flex-end;
+  padding-bottom: 8px;
+}
+
+body.portrait .touch::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: var(--pad-h);
+  background: var(--night);
+  border-top: 2px solid var(--steel);
+}
+
+body.portrait .stick-zone {
+  top: auto;
+  height: var(--pad-h);
+  width: 55%;
+}
+
+body.portrait .stick-base {
+  left: calc(env(safe-area-inset-left) + 28vw);
+  top: 52%;
+}
+
+body.portrait .tbtn-a {
+  right: calc(env(safe-area-inset-right) + 20px);
+  bottom: calc(var(--pad-h) / 2 - var(--btn-a) / 2 + 12px);
+}
+
+body.portrait .tbtn-b {
+  right: calc(env(safe-area-inset-right) + 20px + var(--btn-a) + 6px);
+  bottom: calc(var(--pad-h) / 2 - var(--btn-a) / 2 - 30px);
+}
+
+body.portrait .tbtn-w {
+  right: calc(env(safe-area-inset-right) + 20px + var(--btn-a) + 6px);
+  bottom: calc(var(--pad-h) / 2 + var(--btn-a) / 2 + 2px);
+}
+
+body.portrait .tbtn-pause {
+  left: 50%;
+  margin-left: -22px;
+  top: auto;
+  bottom: calc(env(safe-area-inset-bottom) + 12px);
+}
+
+/* ---------------------------------------------------------------- overlays */
+
+.toast {
+  position: fixed;
+  z-index: 20;
+  left: 50%;
+  top: calc(env(safe-area-inset-top) + 12px);
+  transform: translateX(-50%);
+  max-width: calc(100% - 32px);
+  padding: 8px 12px;
+  background: var(--night);
+  border: 2px solid var(--yellow);
+  color: var(--yellow);
+  font-size: 12px;
+  text-align: center;
+}
+
+.update {
+  position: fixed;
+  z-index: 20;
+  right: calc(env(safe-area-inset-right) + 12px);
+  top: calc(env(safe-area-inset-top) + 12px);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  background: var(--night);
+  border: 2px solid var(--cyan);
+  color: var(--cyan);
+  font-size: 12px;
+}
+
+.update button {
+  font:
+    bold 12px ui-monospace,
+    monospace;
+  background: var(--cyan);
+  color: var(--void);
+  border: 0;
+  padding: 6px 10px;
+  cursor: pointer;
+}
+
+.noscript {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  color: var(--yellow);
+}

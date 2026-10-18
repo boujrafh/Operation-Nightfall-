@@ -1,0 +1,70 @@
+/** Room 0-3 OUTER YARD: takedowns, key cards, the level 1 door. */
+export default {
+  id: '0-3',
+  chapter: 0,
+  name: 'OUTER YARD',
+  music: 'trk_infiltration',
+  tiles: [
+    '########D#######',
+    '#..,,,.....,,,.#',
+    '#.BB......CC.BB#',
+    '#.BB..::..CC.BB#',
+    '......::.......#',
+    '......::..==...#',
+    '......::..==...#',
+    '#.CC..::.......#',
+    '#.CC..::....BB.#',
+    '#.......,,,.BB.#',
+    '################',
+  ],
+  entries: [
+    { id: 'west', x: 1, y: 5, facing: 'E' },
+    { id: 'door', x: 8, y: 1, facing: 'S' },
+  ],
+  exits: [{ id: 'ex_0-3_w', edge: 'W', from: 4, to: 6, targetRoom: '0-2', targetEntry: 'east' }],
+  doors: [{ id: 'door_0-3_lv1', x: 8, y: 0, level: 1 }],
+  cameras: [],
+  guards: [
+    {
+      id: 'g_0-3_card',
+      speed: 0.8,
+      loop: 'pingpong',
+      armed: false,
+      facing: 'S',
+      carries: 'card_1',
+      route: [
+        { x: 9, y: 2, wait: 2.5, look: 'E' },
+        { x: 9, y: 8, wait: 2.5, look: 'E' },
+      ],
+    },
+    {
+      id: 'g_0-3_gate',
+      speed: 0.9,
+      loop: 'pingpong',
+      armed: true,
+      facing: 'E',
+      route: [
+        { x: 3, y: 1, wait: 1.5, look: 'S' },
+        { x: 13, y: 1, wait: 1.5, look: 'S' },
+      ],
+    },
+  ],
+  pickups: [],
+  triggers: [
+    {
+      id: 'tr_0-3_takedown',
+      type: 'codec',
+      area: { x: 0, y: 4, w: 3, h: 3 },
+      dialogueId: 'dlg_hale_takedown',
+      once: true,
+    },
+    {
+      id: 'tr_0-3_lark',
+      type: 'codec',
+      area: { x: 6, y: 1, w: 5, h: 2 },
+      dialogueId: 'dlg_lark_first',
+      once: true,
+    },
+    { id: 'tr_0-3_end', type: 'chapterEnd', area: { x: 8, y: 0, w: 1, h: 1 }, once: false },
+  ],
+};
